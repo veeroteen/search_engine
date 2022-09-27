@@ -3,7 +3,7 @@
 void JSONBase::saveDict(const std::string &fileName)
 {
     std::ofstream file(fileName);
-    file << dict;
+    file << std::setw(4) << dict;
     file.close();
 }
 void JSONBase::openDict(const std::string &fileName)

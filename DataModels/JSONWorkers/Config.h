@@ -14,7 +14,7 @@ public:
 
     std::size_t getFilesCount() const;
 
-    const std::string getFile(std::size_t iterator);
+    const std::string getFile(std::size_t iterator) const;
     void loadConfig(const std::string &str);
 
 };

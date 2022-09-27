@@ -1,6 +1,8 @@
 #include "nlohmann/json.hpp"
-#include "../WordCounter.h"
+#include "WordCounter.h"
 #include <iostream>
+#pragma once
+
 namespace answ {
 
     struct Answer{

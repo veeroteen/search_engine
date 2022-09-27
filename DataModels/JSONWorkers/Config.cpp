@@ -9,7 +9,7 @@ std::size_t Config::getFilesCount() const
     return filesCount;
 }
 
-const std::string Config::getFile(const std::size_t iterator)
+const std::string Config::getFile(const std::size_t iterator) const
 {
 
     try {

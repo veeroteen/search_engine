@@ -1,32 +1,30 @@
 #pragma once
 #include <iostream>
 #include <map>
-#include "WordCounter.h"
+#include "Models/WordCounter.h"
 #include <fstream>
 #include <vector>
 #include <algorithm>
 #include "JSONWorkers/Request.h"
 #include "JSONWorkers/Config.h"
 #include "JSONWorkers/Answer.h"
+#include "../DataModels/Models/WordIndex.h"
 
 class Engine {
-    std::map<std::string,std::vector<WordCounter>> data;
     Request request;
     Config config;
     Answer answer;
+    WordIndex data;
 
-public:
-    Engine(const std::string config,const std::string request,const std::string answer);
 
-    void work();
 
     void setAnswer();
-    void answerFill(std::string &word , std::map<int,int> &bite);
+    void ranking(std::vector<answ::Answer> &arr);
+public:
 
-    void wordHandler(std::string &str) const;
-    void fill();
-    void sort();
-    void draw();
+    Engine(const std::string config,const std::string request,const std::string answer);
+    void work();
+
 
 };
 

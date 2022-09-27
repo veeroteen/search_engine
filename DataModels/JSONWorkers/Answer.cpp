@@ -6,7 +6,6 @@ void Answer::addAnswer(std::vector<answ::Answer> &answer , int max_responses)
         auto buff = new answ::AnswerModel();
         for (std::size_t i = 0; i < max_responses && i < answer.size(); i++) {
             buff->addAnswer(answer[i]);
-
         }
         add(buff);
     }
