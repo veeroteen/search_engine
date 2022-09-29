@@ -2,30 +2,49 @@
 
 void WordIndex::fill(const Config &config)
 {
+
     std::size_t count = config.getFilesCount();
+    std::vector<std::thread*> threads;
+    auto f = [this , &config](int i)
+            {
+                std::ifstream file(config.getFile(i));
+                if (file.is_open()) {
+                    indexFile(&file , i);
+                }
+            };
     for(int i = 0; i < count; i++) {
-        std::ifstream file(config.getFile(i));
-        if (file.is_open()) {
-            indexFile(&file, i);
-        }
+        threads.emplace_back(new std::thread(f,i));
     }
-    sort();
+    for(int i = 0; i < threads.size(); i++)
+    {
+        threads[i]->join();
+    }
     draw();
+
 }
 
 void WordIndex::fill(const std::vector<std::string> &docs)
 {
-    for(int i = 0; i < docs.size(); i++)
-    {
-        std::stringstream file;
-        file << docs[i];
-        indexFile(&file,i);
+
+    std::vector<std::thread*> threads;
+    auto f = [this]( const std::string *str , int i)
+            {
+                std::stringstream file;
+                file << str;
+                indexFile(&file,i);
+            };
+    for(int i = 0; i < docs.size(); i++) {
+        threads.emplace_back(new std::thread(f ,&(docs[i]) , i));
     }
-    sort();
+    for(int i = 0; i < threads.size(); i++)
+    {
+        threads[i]->join();
+    }
     draw();
+
 }
 
-void WordIndex::indexFile(std::istream *file, const int &i)
+void WordIndex::indexFile(std::istream *file, int i)
 {
     std::shared_ptr<int> docID = std::make_shared<int>(i);
     while (!(file->eof())) {
@@ -37,19 +56,14 @@ void WordIndex::indexFile(std::istream *file, const int &i)
     }
 }
 
-void WordIndex::sort()
-{
-    for(auto &i : data) {
-        std::sort(i.second.begin(), i.second.end(), std::greater<WordCounter>());
-    }
-}
+
 
 void WordIndex::draw(){
     for(auto i : data){
 
         std::cout << i.first << " : " << std::endl;
         for(auto j : i.second){
-            std::cout << "          " << *(j.docID.get()) << " - " << j.count << std::endl;
+            std::cout << "          " << *(j.first) << " - " << j.second << std::endl;
         }
     }
 }
@@ -69,22 +83,11 @@ void WordIndex::wordHandler(std::string &str) const
         }
     }
 }
-void WordIndex::addWord(std::vector<WordCounter> *ptr , std::shared_ptr<int> docID)
+void WordIndex::addWord(std::map<std::shared_ptr<int>, int> *ptr , std::shared_ptr<int> docID)
 {
-    if (ptr->size() > 0)
-    {
-        auto j = ptr->end() - 1;
-        if (j->docID == docID) {
-            j->count++;
-        } else {
-            ptr->emplace_back(docID);
-        }
-    }
-    else
-    {
-        ptr->emplace_back(docID);
-    }
-
+    mute.lock();
+    (*ptr)[docID] += 1;
+    mute.unlock();
 }
 
 
@@ -104,6 +107,6 @@ void WordIndex::answerFill(std::string &word , std::map<int,int> &bite)
     auto ptr = &data[word];
     for(auto counter : *ptr)
     {
-        bite[*(counter.docID)] += counter.count;
+        bite[*(counter.first)] += counter.second;
     }
 }

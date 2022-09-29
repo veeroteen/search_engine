@@ -6,19 +6,22 @@
 #include <algorithm>
 #include "AnswerModel.h"
 #include "../JSONWorkers/Config.h"
+#include <thread>
+#include <mutex>
+
 #pragma once
 class WordIndex {
-    std::map<std::string,std::vector<WordCounter>> data;
-
+    std::map<std::string,std::map<std::shared_ptr<int>,int>> data;
+    std::mutex mute;
     void fill(const Config &config);
     void fill(const std::vector<std::string> &docs);
-    void indexFile(std::istream *file, const int &i);
+    void indexFile(std::istream *file, int i);
 
-    void sort();
+
     void draw();
 
     void wordHandler(std::string &str) const;
-    void addWord(std::vector<WordCounter> *ptr , std::shared_ptr<int> docID);
+    void addWord(std::map<std::shared_ptr<int>, int> *ptr , std::shared_ptr<int> docID);
 
 public:
     WordIndex() = default;
