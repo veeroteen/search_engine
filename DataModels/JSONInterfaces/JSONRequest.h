@@ -10,7 +10,6 @@ public:
 
     JSONRequest();
     ~JSONRequest();
-    virtual void addRequest() = 0;
 
     void fillDict() override;
     void load();

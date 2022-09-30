@@ -28,7 +28,10 @@ namespace answ {
         {
             return this->rank < answer.rank ? true : false;
         }
-
+        bool operator == (const answ::Answer answer) const
+        {
+            return (docID == answer.docID) && (rank == answer.rank) ? true : false;
+        }
 
     };
 

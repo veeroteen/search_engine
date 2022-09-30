@@ -11,7 +11,6 @@ public:
 
     Request(const std::string &str);
 
-    void addRequest() override;
 
     const std::vector<std::string>* getWords( const std::size_t iterator);
     void loadRequests(const std::string &str);

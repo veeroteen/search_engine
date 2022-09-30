@@ -1,5 +1,74 @@
 #include "../DataModels/Engine.h"
 #include "gtest/gtest.h"
+#include "PreloadJSON.h"
+using namespace std;
+
+void TestPreload(const  std::string &cfg, const std::vector<std::string>& docs , const std::string req , const std::vector<std::string>& requests )
+{
+    setConfig( cfg, docs);
+    setRequests(req,requests);
+
+
+}
+void TestRelativeIndexFunctionality(
+        const std::vector<std::string>& docs,
+        const std::vector<std::string>& requests,
+        const std::vector<std::vector<answ::Answer>>& expected
+){
+    std::string cfg = "testcfg.json";
+    std::string req = "testreq.json";
+    std::string answ = "testanws.json";
+    TestPreload(cfg,docs,req,requests);
+    Engine engine(cfg,req,answ);
+    engine.work();
+    std::ifstream file(answ);
+    nlohmann::json dict;
+    file >> dict;
+    std::vector<std::vector<answ::Answer>> answer;
+    for( auto i : dict["answers"]) {
+        answer.emplace_back();
+        if (i["result"]) {
+            if(i["relevance"] != nullptr)
+            {
+                for(auto j : i["relevance"])
+                {
+                    answ::Answer buff(j["docid"] ,j["rank"]);
+                    answer[answer.size()-1].push_back(buff);
+                }
+            }
+            else
+            {
+                answ::Answer buff(i["docid"] ,i["rank"]);
+                answer[answer.size()-1].push_back(buff);
+            }
+        }
+    }
+    ASSERT_EQ(answer, expected);
+}
+
+TEST(TestCaseRelativeIndex, TestSimple) {
+    const std::vector<std::string> docs = {
+            "milk milk milk milk water water water",
+            "milk water water",
+            "milk milk milk milk milk water water water water water",
+            "americano cappuccino"
+    };
+    const vector<string> request = {"milk water", "sugar"};
+    const std::vector<std::vector<answ::Answer>> expected = {
+            {
+                    {2, 1},
+                    {0, 0.7},
+                    {1, 0.3}
+            },
+            {
+            }
+    };
+    TestRelativeIndexFunctionality(docs,request,expected);
+}
+
+
+
+
 
 
 void TestInvertedIndexFunctionality(

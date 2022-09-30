@@ -31,7 +31,7 @@ enable_testing()
 
 
 
-add_executable(search_engine_test Tests/Tests.cpp DataModels/Models/WordCounter.h DataModels/Engine.cpp DataModels/Engine.h DataModels/JSONInterfaces/JSONBase.cpp DataModels/JSONInterfaces/JSONBase.h DataModels/JSONInterfaces/JSONConfig.cpp DataModels/JSONInterfaces/JSONConfig.h DataModels/JSONInterfaces/JSONRequest.cpp DataModels/JSONInterfaces/JSONRequest.h DataModels/JSONInterfaces/JSONAnswer.cpp DataModels/JSONInterfaces/JSONAnswer.h DataModels/JSONWorkers/Request.cpp DataModels/JSONWorkers/Request.h DataModels/JSONWorkers/Config.cpp DataModels/JSONWorkers/Config.h DataModels/Models/AnswerModel.h DataModels/JSONWorkers/Answer.cpp DataModels/JSONWorkers/Answer.h DataModels/Models/WordIndex.cpp DataModels/Models/WordIndex.h)
+add_executable(search_engine_test Tests/Tests.cpp DataModels/Models/WordCounter.h DataModels/Engine.cpp DataModels/Engine.h DataModels/JSONInterfaces/JSONBase.cpp DataModels/JSONInterfaces/JSONBase.h DataModels/JSONInterfaces/JSONConfig.cpp DataModels/JSONInterfaces/JSONConfig.h DataModels/JSONInterfaces/JSONRequest.cpp DataModels/JSONInterfaces/JSONRequest.h DataModels/JSONInterfaces/JSONAnswer.cpp DataModels/JSONInterfaces/JSONAnswer.h DataModels/JSONWorkers/Request.cpp DataModels/JSONWorkers/Request.h DataModels/JSONWorkers/Config.cpp DataModels/JSONWorkers/Config.h DataModels/Models/AnswerModel.h DataModels/JSONWorkers/Answer.cpp DataModels/JSONWorkers/Answer.h DataModels/Models/WordIndex.cpp DataModels/Models/WordIndex.h Tests/PreloadJSON.h)
 
 target_link_libraries(search_engine_test PRIVATE nlohmann_json::nlohmann_json PRIVATE gtest_main)
 include(GoogleTest)

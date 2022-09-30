@@ -4,27 +4,6 @@ Request::Request(const std::string &str) {
     loadRequests(str);
 }
 
-void Request::addRequest()
-{
-    words = new std::vector<std::string>;
-    std::cout << "Enter word, or 0 to end\n";
-    while(true)
-    {
-        std::string str;
-        std::cin >>
-        str;
-        if(str[0] != '0')
-        {
-            words->
-            push_back(str);
-        }
-        else
-        {
-            break;
-        }
-    }
-    requests->push_back(words);
-}
 
 const std::vector<std::string>* Request::getWords( const std::size_t iterator)
 {
