@@ -40,12 +40,12 @@ const std::vector<std::string> docs = {
         "milk milk milk milk milk water water water water water",
         "americano cappuccino"
 };
-std::vector<std::string> requests = {"milk", "water", "cappuchino"};
+std::vector<std::string> requests = {"milk", "water", "cappuccino"};
 const std::vector<std::map<int,int>> expected = {
         {
                 {0, 4}, {1, 1}, {2, 5}
         }, {
-                {0, 2}, {1, 2}, {2, 5}
+                {0, 3}, {1, 2}, {2, 5}
         }, {
                 {3, 1}
         }

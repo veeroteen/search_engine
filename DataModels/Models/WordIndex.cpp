@@ -30,7 +30,7 @@ void WordIndex::fill(const std::vector<std::string> &docs)
     auto f = [this]( const std::string *str , int i)
             {
                 std::stringstream file;
-                file << str;
+                file << (*str);
                 indexFile(&file,i);
             };
     for(int i = 0; i < docs.size(); i++) {
