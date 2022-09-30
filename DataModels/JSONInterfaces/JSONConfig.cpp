@@ -8,10 +8,7 @@ std::string JSONConfig::getVersion() const
 {
     return config["version"];
 }
-int JSONConfig::getResponseCount() const
-{
-    return config["max_responses"];
-}
+
 void JSONConfig::fillDict()
 {
 dict["config"] = config;

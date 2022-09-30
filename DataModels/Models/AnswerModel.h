@@ -22,11 +22,28 @@ namespace answ {
 
         bool operator > (const answ::Answer answer) const
         {
-            return this->rank > answer.rank ? true : false;
+
+            if(this->rank > answer.rank)
+            {
+                return true;
+            }
+            if(this->rank == answer.rank && this->docID < answer.docID)
+            {
+                return true;
+            }
+            return false;
         }
         bool operator < ( const answ::Answer answer) const
         {
-            return this->rank < answer.rank ? true : false;
+            if(this->rank < answer.rank)
+            {
+                return true;
+            }
+            if(this->rank == answer.rank && this->docID > answer.docID)
+            {
+                return true;
+            }
+            return false;
         }
         bool operator == (const answ::Answer answer) const
         {

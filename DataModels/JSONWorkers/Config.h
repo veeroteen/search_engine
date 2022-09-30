@@ -13,7 +13,7 @@ public:
     Config(const std::string &str);
 
     std::size_t getFilesCount() const;
-
+    int getResponseCount() const;
     const std::string getFile(std::size_t iterator) const;
     void loadConfig(const std::string &str);
 

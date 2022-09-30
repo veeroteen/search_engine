@@ -14,7 +14,7 @@ public:
 
     std::string getName() const;
     std::string getVersion() const;
-    int getResponseCount() const;
+
     void fillDict() override;
     void load(const std::string &str);
 

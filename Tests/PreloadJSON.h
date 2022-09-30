@@ -7,7 +7,7 @@ void setConfig(const std::string &fileName, const std::vector<std::string> &docs
     nlohmann::json cfg;
     cfg["name"] = "TEST";
     cfg["version"] = 0;
-    cfg["max_responses"] = 10;
+    cfg["max_responses"] = 5;
     std::vector<std::string> fileNames;
     for(int i = 0; i < docs.size(); i++)
     {

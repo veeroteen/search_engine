@@ -30,3 +30,7 @@ void Config::loadConfig(const std::string &str)
     load(str);
     filesCount = files.size();
 }
+int Config::getResponseCount() const
+{
+    return config["max_responses"];
+}

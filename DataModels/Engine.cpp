@@ -47,9 +47,8 @@ void Engine::ranking(std::vector<answ::Answer> &arr)
             arr[j].rank /= buff;
         }
     }
-    answer.addAnswer(arr, config.getFilesCount());
+    answer.addAnswer(arr, config.getResponseCount());
 }
-
 
 
 
