@@ -51,8 +51,10 @@ void WordIndex::indexFile(std::istream *file, int i)
         std::string cache;
         (*file) >> cache;
         wordHandler(cache);
-        auto ptr = &data[cache];
-        addWord(ptr, docID);
+        if(cache.length() > 0) {
+            auto ptr = &data[cache];
+            addWord(ptr, docID);
+        }
     }
 }
 
@@ -77,9 +79,10 @@ void WordIndex::wordHandler(std::string &str) const
             str[i] +=32;
             continue;
         }
-        if(str[i] < 97 && str[i] > 122)
+        if(str[i] < 97 || str[i] > 122)
         {
             str.erase(i, 1);
+            i--;
         }
     }
 }

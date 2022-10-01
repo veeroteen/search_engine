@@ -156,7 +156,7 @@ TestInvertedIndexFunctionality(docs, requests, expected);
 }
 TEST(TestCaseInvertedIndex, TestInvertedIndexMissingWord) {
 const std::vector<std::string> docs = {
-        "a b c d e f g h i j k l",
+        "A b c d e f g h i j k l 11 1",
         "statement"
 };
 std::vector<std::string> requests = {"m", "statement"};
