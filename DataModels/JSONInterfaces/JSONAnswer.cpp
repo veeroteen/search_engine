@@ -20,7 +20,7 @@ void JSONAnswer::fillDict()
     {
         auto answer = answers[i];
         std::string str = "request";
-        buff[str + std::to_string(i)] = answer->toDict();
+        buff[str + std::to_string(answer->requestID)] = answer->toDict();
     }
     dict["answers"] = buff;
 }

@@ -5,14 +5,13 @@ Request::Request(const std::string &str) {
 }
 
 
-const std::vector<std::string>* Request::getWords( const std::size_t iterator)
+const std::vector<std::string>* Request::getWords( const std::size_t iterator) const
 {
     if(iterator > requests->size() - 1)
     {
         return nullptr;
     }
-    words = (*requests)[iterator];
-    return words;
+    return (*requests)[iterator];
 }
 
 void Request::loadRequests(const std::string &str)

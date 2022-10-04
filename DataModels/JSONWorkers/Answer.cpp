@@ -1,18 +1,15 @@
 #include "Answer.h"
 
-void Answer::addAnswer(std::vector<answ::Answer> &answer , int max_responses)
+void Answer::addAnswer(std::vector<answ::Answer> &answer , int max_responses , int requestID)
 {
-    if(answer.size() != 0) {
-        auto buff = new answ::AnswerModel();
-        for (std::size_t i = 0; i < max_responses && i < answer.size(); i++) {
-            buff->addAnswer(answer[i]);
-        }
-        add(buff);
+    auto buff = new answ::AnswerModel();
+    buff->requestID = requestID;
+    for (std::size_t i = 0; i < max_responses && i < answer.size(); i++) {
+        buff->addAnswer(answer[i]);
     }
-    else
-    {
-        add(new answ::AnswerModel());
-    }
+    mute.lock();
+    add(buff);
+    mute.unlock();
 }
 void Answer::saveData()
 {

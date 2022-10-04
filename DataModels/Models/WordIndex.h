@@ -13,10 +13,7 @@
 class WordIndex {
     std::map<std::string,std::map<std::shared_ptr<int>,int>> data;
     std::mutex mute;
-    void fill(const Config &config);
-    void fill(const std::vector<std::string> &docs);
     void indexFile(std::istream *file, int i);
-
 
     void draw();
 

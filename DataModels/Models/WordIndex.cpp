@@ -19,7 +19,7 @@ void WordIndex::UpdateDocumentBase(const Config &config)
     {
         threads[i]->join();
     }
-    draw();
+    //draw();
 
 }
 
@@ -40,7 +40,7 @@ void WordIndex::UpdateDocumentBase(const std::vector<std::string> &docs)
     {
         threads[i]->join();
     }
-    draw();
+    //draw();
 
 }
 
@@ -98,7 +98,9 @@ void WordIndex::addWord(std::map<std::shared_ptr<int>, int> *ptr , std::shared_p
 void WordIndex::answerFill(std::string &word , std::map<int,int> &bite)
 {
     answ::Answer buff;
+    mute.lock();
     auto ptr = &data[word];
+    mute.unlock();
     for(auto counter : *ptr)
     {
         bite[*(counter.first)] += counter.second;

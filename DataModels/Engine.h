@@ -16,7 +16,7 @@ class Engine {
     WordIndex data;
 
     void setAnswer();
-    void ranking(std::vector<answ::Answer> &arr);
+    void ranking(std::vector<answ::Answer> &arr) const;
 public:
 
     Engine(const std::string config,const std::string request,const std::string answer);

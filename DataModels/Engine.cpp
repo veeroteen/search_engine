@@ -19,26 +19,33 @@ void Engine::work()
 void Engine::setAnswer()
 {
     std::size_t count = request.getRequestsCount();
-    for(int i = 0; i < count; i++)
-    {
+    auto f = [this](int i) {
         auto words = request.getWords(i);
-        std::map<int,int> bite;
-        for(auto word : *words)
-        {
-            data.answerFill(word,bite);
+        std::map<int, int> bite;
+        for (auto word: *words) {
+            data.answerFill(word, bite);
         }
-        std::vector <answ::Answer> arr;
-        for(auto &ptr : bite)
-        {
-            arr.emplace_back(ptr.first,ptr.second);
+        std::vector<answ::Answer> arr;
+        for (auto &ptr: bite) {
+            arr.emplace_back(ptr.first, ptr.second);
         }
         ranking(arr);
-
+        answer.addAnswer(arr, config.getResponseCount(), i);
+    };
+    std::vector<std::thread*> threads;
+    for(int i = 0; i < count; i++)
+    {
+        threads.emplace_back( new std::thread(f,i));
     }
+    for(int i = 0; i < threads.size(); i++)
+    {
+        threads[i]->join();
+    }
+
     answer.saveData();
 }
 
-void Engine::ranking(std::vector<answ::Answer> &arr)
+void Engine::ranking(std::vector<answ::Answer> &arr) const
 {
     std::sort(arr.begin(), arr.end() ,std::greater<answ::Answer>());
     if(arr.size() > 0) {
@@ -47,7 +54,6 @@ void Engine::ranking(std::vector<answ::Answer> &arr)
             arr[j].rank /= buff;
         }
     }
-    answer.addAnswer(arr, config.getResponseCount());
 }
 
 

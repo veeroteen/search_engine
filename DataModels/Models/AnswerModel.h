@@ -53,6 +53,7 @@ namespace answ {
     };
 
     struct AnswerModel {
+        int requestID;
         bool result;
         std::vector<answ::Answer> answers;
 
