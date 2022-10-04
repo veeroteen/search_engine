@@ -7,19 +7,12 @@ Request::Request(const std::string &str) {
 
 const std::vector<std::string>* Request::getWords( const std::size_t iterator)
 {
-    try {
-        if(iterator > requests->size() - 1)
-        {
-            throw;
-        }
-        words = (*requests)[iterator];
-        return words;
-    }
-    catch(...)
+    if(iterator > requests->size() - 1)
     {
-        std::cerr << "Request out of range\n";
         return nullptr;
     }
+    words = (*requests)[iterator];
+    return words;
 }
 
 void Request::loadRequests(const std::string &str)

@@ -1,6 +1,6 @@
 #include "WordIndex.h"
 
-void WordIndex::fill(const Config &config)
+void WordIndex::UpdateDocumentBase(const Config &config)
 {
 
     std::size_t count = config.getFilesCount();
@@ -23,7 +23,7 @@ void WordIndex::fill(const Config &config)
 
 }
 
-void WordIndex::fill(const std::vector<std::string> &docs)
+void WordIndex::UpdateDocumentBase(const std::vector<std::string> &docs)
 {
 
     std::vector<std::thread*> threads;
@@ -52,13 +52,13 @@ void WordIndex::indexFile(std::istream *file, int i)
         (*file) >> cache;
         wordHandler(cache);
         if(cache.length() > 0) {
+            mute.lock();
             auto ptr = &data[cache];
+            mute.unlock();
             addWord(ptr, docID);
         }
     }
 }
-
-
 
 void WordIndex::draw(){
     for(auto i : data){
@@ -74,18 +74,19 @@ void WordIndex::wordHandler(std::string &str) const
 {
     for(int i = 0; i < str.length(); i++)
     {
-        if(str[i] < 91 && str[i] > 64)
+        if(str[i] <= 'Z' && str[i] >= 'A')
         {
             str[i] +=32;
             continue;
         }
-        if(str[i] < 97 || str[i] > 122)
+        if(str[i] < 'a' || str[i] > 'z')
         {
             str.erase(i, 1);
             i--;
         }
     }
 }
+
 void WordIndex::addWord(std::map<std::shared_ptr<int>, int> *ptr , std::shared_ptr<int> docID)
 {
     mute.lock();
@@ -93,16 +94,6 @@ void WordIndex::addWord(std::map<std::shared_ptr<int>, int> *ptr , std::shared_p
     mute.unlock();
 }
 
-
-void WordIndex::UpdateDocumentBase(const Config &config)
-{
-    fill(config);
-}
-
-void WordIndex::UpdateDocumentBase(const std::vector<std::string> &docs)
-{
-    fill(docs);
-}
 
 void WordIndex::answerFill(std::string &word , std::map<int,int> &bite)
 {

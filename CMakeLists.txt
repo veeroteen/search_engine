@@ -7,8 +7,6 @@ set(CMAKE_CXX_STANDARD 17)
 set(JSON_BuildTests OFF CACHE INTERNAL "")
 
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
-set(gtest_disable_pthreads on)
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 add_subdirectory(nlohmann_json)
 

@@ -22,13 +22,12 @@ void JSONRequest::fillDict()
 {
     for(auto i : *requests)
     {
-        std::string *buff = new std::string;
+        std::string buff;
         for(auto j : *i){
-            *buff += j;
-            *buff += ' ';
+            buff += j;
+            buff += ' ';
         }
-    dict["requests"] += *buff;
-    delete buff;
+    dict["requests"] += buff;
     }
 
 }
