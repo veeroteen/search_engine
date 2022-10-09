@@ -4,12 +4,13 @@
 #include <fstream>
 
 class JSONBase {
-public:
-    nlohmann::json dict;
 
+public:
     JSONBase() = default;
     virtual void fillDict() = 0;
     void saveDict(const std::string &fileName);
     void openDict(const std::string &fileName);
+protected:
+    nlohmann::json dict;
 };
 

@@ -3,10 +3,7 @@
 #include <string>
 #include <sstream>
 class JSONRequest : public JSONBase {
-
-
 public:
-    std::vector<std::vector<std::string>*> *requests;
 
     JSONRequest();
     ~JSONRequest();
@@ -15,6 +12,7 @@ public:
     void load();
 
     std::size_t requestsCount() const;
-
+protected:
+    std::vector<std::vector<std::string>*> *requests;
 };
 

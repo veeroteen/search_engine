@@ -7,8 +7,6 @@
 #include <iostream>
 class JSONConfig : public JSONBase {
 public:
-    nlohmann::json config;
-    std::vector <std::string> files;
 
     JSONConfig() = default;
 
@@ -17,7 +15,9 @@ public:
 
     void fillDict() override;
     void load(const std::string &str);
-
+protected:
+    nlohmann::json config;
+    std::vector <std::string> files;
 };
 
 

@@ -5,7 +5,6 @@
 #include <iostream>
 
 class Config : private JSONConfig{
-
     std::string file;
     int filesCount;
 public:
