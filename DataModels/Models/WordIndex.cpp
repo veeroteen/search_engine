@@ -12,15 +12,11 @@ void WordIndex::UpdateDocumentBase(const Config &config)
                     indexFile(&file , i);
                 }
             };
+    ThreadPoolI threadPool;
     for(int i = 0; i < count; i++) {
-        threads.emplace_back(new std::thread(f,i));
+        threadPool.add_task(f,i);
     }
-    for(int i = 0; i < threads.size(); i++)
-    {
-        threads[i]->join();
-    }
-    //draw();
-
+    threadPool.wait_all();
 }
 
 void WordIndex::UpdateDocumentBase(const std::vector<std::string> &docs)
@@ -33,15 +29,11 @@ void WordIndex::UpdateDocumentBase(const std::vector<std::string> &docs)
                 file << (*str);
                 indexFile(&file,i);
             };
+    ThreadPoolI threadPool;
     for(int i = 0; i < docs.size(); i++) {
-        threads.emplace_back(new std::thread(f ,&(docs[i]) , i));
+        threadPool.add_task(f ,&(docs[i]) , i);
     }
-    for(int i = 0; i < threads.size(); i++)
-    {
-        threads[i]->join();
-    }
-    //draw();
-
+    threadPool.wait_all();
 }
 
 void WordIndex::indexFile(std::istream *file, int i)
@@ -54,8 +46,8 @@ void WordIndex::indexFile(std::istream *file, int i)
         if(cache.length() > 0) {
             mute.lock();
             auto ptr = &data[cache];
+            (*ptr)[docID] += 1;
             mute.unlock();
-            addWord(ptr, docID);
         }
     }
 }
@@ -86,14 +78,6 @@ void WordIndex::wordHandler(std::string &str) const
         }
     }
 }
-
-void WordIndex::addWord(std::map<std::shared_ptr<int>, int> *ptr , std::shared_ptr<int> docID)
-{
-    mute.lock();
-    (*ptr)[docID] += 1;
-    mute.unlock();
-}
-
 
 void WordIndex::answerFill(std::string &word , std::map<int,int> &bite)
 {

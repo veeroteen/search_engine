@@ -11,7 +11,7 @@ public:
     JSONAnswer() = default;
     ~JSONAnswer();
     void add(answ::AnswerModel *answer);
-    void fillDict() override;
+    void fillDict();
     void save(const std::string &string);
 protected:
     std::vector<answ::AnswerModel*> answers;

@@ -8,7 +8,8 @@
 #include "JSONWorkers/Request.h"
 #include "JSONWorkers/Config.h"
 #include "JSONWorkers/Answer.h"
-#include "../DataModels/Models/WordIndex.h"
+#include "Models/WordIndex.h"
+#include "ThreadPool/ThreadPoolI.h"
 class Engine {
     Request request;
     Config config;

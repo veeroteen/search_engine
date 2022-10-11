@@ -1,22 +1,14 @@
 #include "JSONConfig.h"
 
-std::string JSONConfig::getName() const
+
+int JSONConfig::getResponsesCount() const
 {
-    return config["name"];
-}
-std::string JSONConfig::getVersion() const
-{
-    return config["version"];
+    return responseCount;
 }
 
-void JSONConfig::fillDict()
-{
-dict["config"] = config;
-dict["files"] = files;
-}
 void JSONConfig::load(const std::string &str)
 {
     openDict(str);
-    config = dict["config"];
+    responseCount = dict["config"]["max_responses"];
     files = std::vector<std::string>(dict["files"]);
 }

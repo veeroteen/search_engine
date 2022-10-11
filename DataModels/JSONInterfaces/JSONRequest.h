@@ -8,7 +8,7 @@ public:
     JSONRequest();
     ~JSONRequest();
 
-    void fillDict() override;
+    void fillDict();
     void load();
 
     std::size_t requestsCount() const;

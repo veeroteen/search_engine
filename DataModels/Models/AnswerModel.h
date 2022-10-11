@@ -88,14 +88,8 @@ namespace answ {
         }
 
         void addAnswer(answ::Answer &answ) {
-            try {
-                answers.push_back(answ);
-                result = true;
-            }
-            catch (...) {
-                std::cerr << "answer cause exception" << std::endl;
-            }
-
+            answers.push_back(answ);
+            result = true;
         }
     };
 

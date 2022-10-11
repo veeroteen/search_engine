@@ -7,7 +7,6 @@ class JSONBase {
 
 public:
     JSONBase() = default;
-    virtual void fillDict() = 0;
     void saveDict(const std::string &fileName);
     void openDict(const std::string &fileName);
 protected:

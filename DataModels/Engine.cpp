@@ -30,18 +30,15 @@ void Engine::setAnswer()
             arr.emplace_back(ptr.first, ptr.second);
         }
         ranking(arr);
-        answer.addAnswer(arr, config.getResponseCount(), i);
+        answer.addAnswer(arr, config.getResponsesCount(), i);
     };
-    std::vector<std::thread*> threads;
+    ThreadPoolI threadPool;
     for(int i = 0; i < count; i++)
     {
-        threads.emplace_back( new std::thread(f,i));
+        threadPool.add_task( f,i);
     }
-    for(int i = 0; i < threads.size(); i++)
-    {
-        threads[i]->join();
-    }
-
+    threadPool.wait_all();
+    //delete threadPool;
     answer.saveData();
 }
 

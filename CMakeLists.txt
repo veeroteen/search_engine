@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.22)
 project(search_engine)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 
 set(JSON_BuildTests OFF CACHE INTERNAL "")
@@ -10,9 +10,9 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
 add_subdirectory(nlohmann_json)
 
-add_executable(search_engine main.cpp DataModels/Models/WordCounter.h DataModels/Engine.cpp DataModels/Engine.h DataModels/JSONInterfaces/JSONBase.cpp DataModels/JSONInterfaces/JSONBase.h DataModels/JSONInterfaces/JSONConfig.cpp DataModels/JSONInterfaces/JSONConfig.h DataModels/JSONInterfaces/JSONRequest.cpp DataModels/JSONInterfaces/JSONRequest.h DataModels/JSONInterfaces/JSONAnswer.cpp DataModels/JSONInterfaces/JSONAnswer.h DataModels/JSONWorkers/Request.cpp DataModels/JSONWorkers/Request.h DataModels/JSONWorkers/Config.cpp DataModels/JSONWorkers/Config.h DataModels/Models/AnswerModel.h DataModels/JSONWorkers/Answer.cpp DataModels/JSONWorkers/Answer.h DataModels/Models/WordIndex.cpp DataModels/Models/WordIndex.h)
+add_executable(search_engine main.cpp DataModels/Models/WordCounter.h DataModels/Engine.cpp DataModels/Engine.h DataModels/JSONInterfaces/JSONBase.cpp DataModels/JSONInterfaces/JSONBase.h DataModels/JSONInterfaces/JSONConfig.cpp DataModels/JSONInterfaces/JSONConfig.h DataModels/JSONInterfaces/JSONRequest.cpp DataModels/JSONInterfaces/JSONRequest.h DataModels/JSONInterfaces/JSONAnswer.cpp DataModels/JSONInterfaces/JSONAnswer.h DataModels/JSONWorkers/Request.cpp DataModels/JSONWorkers/Request.h DataModels/JSONWorkers/Config.cpp DataModels/JSONWorkers/Config.h DataModels/Models/AnswerModel.h DataModels/JSONWorkers/Answer.cpp DataModels/JSONWorkers/Answer.h DataModels/Models/WordIndex.cpp DataModels/Models/WordIndex.h DataModels/ThreadPool/ThreadPoolI.h DataModels/ThreadPool/ThreadPoolI.cpp)
 
-target_link_libraries(search_engine PRIVATE nlohmann_json::nlohmann_json)
+
 
 
 
@@ -24,12 +24,14 @@ FetchContent_Declare(
         GIT_REPOSITORY https://github.com/google/googletest.git
         GIT_TAG 58d77fa8070e8cec2dc1ed015d66b454c8d78850
 )
+
+target_link_libraries(search_engine PRIVATE nlohmann_json::nlohmann_json)
 FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 
 
-add_executable(search_engine_test Tests/Tests.cpp DataModels/Models/WordCounter.h DataModels/Engine.cpp DataModels/Engine.h DataModels/JSONInterfaces/JSONBase.cpp DataModels/JSONInterfaces/JSONBase.h DataModels/JSONInterfaces/JSONConfig.cpp DataModels/JSONInterfaces/JSONConfig.h DataModels/JSONInterfaces/JSONRequest.cpp DataModels/JSONInterfaces/JSONRequest.h DataModels/JSONInterfaces/JSONAnswer.cpp DataModels/JSONInterfaces/JSONAnswer.h DataModels/JSONWorkers/Request.cpp DataModels/JSONWorkers/Request.h DataModels/JSONWorkers/Config.cpp DataModels/JSONWorkers/Config.h DataModels/Models/AnswerModel.h DataModels/JSONWorkers/Answer.cpp DataModels/JSONWorkers/Answer.h DataModels/Models/WordIndex.cpp DataModels/Models/WordIndex.h Tests/PreloadJSON.h)
+add_executable(search_engine_test Tests/Tests.cpp DataModels/Models/WordCounter.h DataModels/Engine.cpp DataModels/Engine.h DataModels/JSONInterfaces/JSONBase.cpp DataModels/JSONInterfaces/JSONBase.h DataModels/JSONInterfaces/JSONConfig.cpp DataModels/JSONInterfaces/JSONConfig.h DataModels/JSONInterfaces/JSONRequest.cpp DataModels/JSONInterfaces/JSONRequest.h DataModels/JSONInterfaces/JSONAnswer.cpp DataModels/JSONInterfaces/JSONAnswer.h DataModels/JSONWorkers/Request.cpp DataModels/JSONWorkers/Request.h DataModels/JSONWorkers/Config.cpp DataModels/JSONWorkers/Config.h DataModels/Models/AnswerModel.h DataModels/JSONWorkers/Answer.cpp DataModels/JSONWorkers/Answer.h DataModels/Models/WordIndex.cpp DataModels/Models/WordIndex.h Tests/PreloadJSON.h DataModels/ThreadPool/ThreadPoolI.h DataModels/ThreadPool/ThreadPoolI.cpp)
 
 target_link_libraries(search_engine_test PRIVATE nlohmann_json::nlohmann_json PRIVATE gtest_main)
 include(GoogleTest)
