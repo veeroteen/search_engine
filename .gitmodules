@@ -1,0 +1,6 @@
+[submodule "nlohmannjson"]
+	path = nlohmannjson
+	url = https://github.com/nlohmann/json
+[submodule "DataModels\\ThreadPool"]
+	path = DataModels\\ThreadPool
+	url = https://github.com/progschj/ThreadPool

@@ -3,36 +3,41 @@
 void WordIndex::UpdateDocumentBase(const Config &config)
 {
     std::size_t count = config.getFilesCount();
-    /*auto f = [this , &config](int i)
+    auto f = [this , &config](int i)
             {
                 std::ifstream file(config.getFile(i));
                 if (file.is_open()) {
                     indexFile(&file , i);
                 }
             };
-            */
+    std::vector<std::future<void>> futures;
     ThreadPool threadPool(2);
     for(std::size_t i = 0; i < count; i++) {
-        //futures.push_back(threadPool.enqueue(f,i));
+        futures.push_back(threadPool.enqueue(f,i));
     }
-    //threadPool.wait_all();
+    for(auto &future : futures){
+        future.get();
+    }
 }
 
 void WordIndex::UpdateDocumentBase(const std::vector<std::string> &docs)
 {
-    /*
+
     auto f = [this]( const std::string *str , int i) //lambda for multithreading
             {
                 std::stringstream file;
                 file << (*str);
                 indexFile(&file,i);
             };
-            */
 
+    std::vector<std::future<void>> futures;
+    ThreadPool threadPool(2);
     for(std::size_t i = 0; i < docs.size(); i++) {
-        //threadPool.add_task(f ,&(docs[i]) , i);
+        threadPool.enqueue(f ,&(docs[i]) , i);
     }
-    //threadPool.wait_all();
+    for(auto &future : futures){
+        future.get();
+    }
 }
 
 void WordIndex::indexFile(std::istream *file, int i)
