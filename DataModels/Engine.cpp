@@ -3,8 +3,8 @@
 
 Engine::Engine(const std::string config,const std::string request,const std::string answer)
 {
-    this->request.loadRequests(request);
     this->config.loadConfig(config);
+    this->request.loadRequests(request);
     this->answer.setFileName(answer);
 }
 

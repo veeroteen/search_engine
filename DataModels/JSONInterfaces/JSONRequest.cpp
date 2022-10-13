@@ -18,8 +18,14 @@ JSONRequest::~JSONRequest()
     }
 }
 
-void JSONRequest::load()
+void JSONRequest::load(const std::string &str)
 {
+    openDict(str);
+    if(dict.begin() == dict.end())
+    {
+        openDict("../Configs/requests.json");
+        saveDict(str);
+    }
     std::vector<std::string> rawRequests = dict["requests"];
     for(auto i : rawRequests)
     {
@@ -33,6 +39,7 @@ void JSONRequest::load()
         }
         requests->push_back(arr);
     }
+    dict.clear();
 }
 
 std::size_t JSONRequest::requestsCount() const

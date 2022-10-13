@@ -67,8 +67,8 @@ void WordIndex::wordHandler(std::string &str) const
         }
         if(str[i] < 'a' || str[i] > 'z')
         {
-            str = nullptr;
-         }
+            str.erase(i,1);
+        }
     }
 }
 
