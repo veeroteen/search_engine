@@ -10,7 +10,7 @@ class Answer : private JSONAnswer {
     std::mutex mute;
 public:
 
-    void addAnswer(std::vector<answ::Answer> &answer , int max_responses, int requestID);
+    void addAnswer(std::vector<answ::Answer> &answer , std::size_t max_responses, int requestID);
     void saveData();
     void setFileName(std::string fileName);
 };

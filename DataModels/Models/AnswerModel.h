@@ -61,6 +61,8 @@ namespace answ {
         {
             result = false;
         }
+
+        //convert answer to json format
         nlohmann::json toDict() {
             nlohmann::json total;
             total["result"] = result;
@@ -87,6 +89,7 @@ namespace answ {
 
         }
 
+        //add answer and set result true;
         void addAnswer(answ::Answer &answ) {
             answers.push_back(answ);
             result = true;

@@ -8,9 +8,7 @@ public:
     JSONRequest();
     ~JSONRequest();
 
-    void fillDict();
     void load();
-
     std::size_t requestsCount() const;
 protected:
     std::vector<std::vector<std::string>*> *requests;

@@ -1,6 +1,8 @@
 #include "../DataModels/Engine.h"
 #include "gtest/gtest.h"
 #include "PreloadJSON.h"
+
+
 using namespace std;
 
 void TestPreload(const  std::string &cfg, const std::vector<std::string>& docs , const std::string req , const std::vector<std::string>& requests )
@@ -156,7 +158,7 @@ TestInvertedIndexFunctionality(docs, requests, expected);
 }
 TEST(TestCaseInvertedIndex, TestInvertedIndexMissingWord) {
 const std::vector<std::string> docs = {
-        "A b c d e f g h i j k l 11 1",
+        "A b c d e f g h i j k l",
         "statement"
 };
 std::vector<std::string> requests = {"m", "statement"};

@@ -19,7 +19,9 @@ void Engine::work()
 void Engine::setAnswer()
 {
     std::size_t count = request.getRequestsCount();
-    auto f = [this](int i) {
+
+    auto f = [this](std::size_t i) // lambda for multithreading
+    {
         auto words = request.getWords(i);
         std::map<int, int> bite;
         for (auto word: *words) {
@@ -32,13 +34,15 @@ void Engine::setAnswer()
         ranking(arr);
         answer.addAnswer(arr, config.getResponsesCount(), i);
     };
-    ThreadPoolI threadPool;
-    for(int i = 0; i < count; i++)
+    std::vector<std::future<void>> futures;
+    ThreadPool threadPool(2);
+    for(std::size_t i = 0; i < count; i++)
     {
-        threadPool.add_task( f,i);
+        futures.push_back(threadPool.enqueue(f,i));
     }
-    threadPool.wait_all();
-    //delete threadPool;
+    for(auto &future : futures){
+        future.get();
+    }
     answer.saveData();
 }
 
@@ -47,7 +51,7 @@ void Engine::ranking(std::vector<answ::Answer> &arr) const
     std::sort(arr.begin(), arr.end() ,std::greater<answ::Answer>());
     if(arr.size() > 0) {
         float buff = arr[0].rank;
-        for (int j = 0; j < arr.size(); j++) {
+        for (std::size_t j = 0; j < arr.size(); j++) {
             arr[j].rank /= buff;
         }
     }

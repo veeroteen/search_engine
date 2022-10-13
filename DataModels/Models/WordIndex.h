@@ -8,23 +8,29 @@
 #include "../JSONWorkers/Config.h"
 #include <thread>
 #include <mutex>
-#include "../ThreadPool/ThreadPoolI.h"
+#include "../Threadpool/ThreadPool.h"
 #pragma once
 class WordIndex {
     std::map<std::string,std::map<std::shared_ptr<int>,int>> data;
     std::mutex mute;
+
+    //add words from files to word dictionary
     void indexFile(std::istream *file, int i);
 
-    void draw();
-
+    // bring word to normal state(change uppercase letter to lower). set word null if word have unsupported symbol
     void wordHandler(std::string &str) const;
-    void addWord(std::map<std::shared_ptr<int>, int> *ptr , std::shared_ptr<int> docID);
+
 
 public:
     WordIndex() = default;
 
+    //fill word dictionary, by files input
     void UpdateDocumentBase(const Config &config);
+
+    //fill word dictionary, by vector of texts
     void UpdateDocumentBase(const std::vector<std::string> &docs);
-    void answerFill(std::string &word , std::map<int,int> &bite);
+
+    //fill raw answer by word
+    void answerFill( const std::string &word , std::map<int,int> &bite) const;
 
 };

@@ -9,7 +9,7 @@ void setConfig(const std::string &fileName, const std::vector<std::string> &docs
     cfg["version"] = 0;
     cfg["max_responses"] = 5;
     std::vector<std::string> fileNames;
-    for(int i = 0; i < docs.size(); i++)
+    for(std::size_t i = 0; i < docs.size(); i++)
     {
         std::string buff = "testfile" + std::to_string(i) + ".txt";
         std::ofstream file(buff);

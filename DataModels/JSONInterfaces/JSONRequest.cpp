@@ -18,20 +18,6 @@ JSONRequest::~JSONRequest()
     }
 }
 
-void JSONRequest::fillDict()
-{
-    for(auto i : *requests)
-    {
-        std::string buff;
-        for(auto j : *i){
-            buff += j;
-            buff += ' ';
-        }
-    dict["requests"] += buff;
-    }
-
-}
-
 void JSONRequest::load()
 {
     std::vector<std::string> rawRequests = dict["requests"];

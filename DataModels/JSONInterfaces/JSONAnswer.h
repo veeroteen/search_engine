@@ -12,7 +12,6 @@ public:
     ~JSONAnswer();
     void add(answ::AnswerModel *answer);
     void fillDict();
-    void save(const std::string &string);
 protected:
     std::vector<answ::AnswerModel*> answers;
 };

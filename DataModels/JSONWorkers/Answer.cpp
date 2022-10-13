@@ -1,6 +1,6 @@
 #include "Answer.h"
 
-void Answer::addAnswer(std::vector<answ::Answer> &answer , int max_responses , int requestID)
+void Answer::addAnswer(std::vector<answ::Answer> &answer , std::size_t max_responses , int requestID)
 {
     auto buff = new answ::AnswerModel();
     buff->requestID = requestID;
@@ -14,7 +14,7 @@ void Answer::addAnswer(std::vector<answ::Answer> &answer , int max_responses , i
 void Answer::saveData()
 {
     fillDict();
-    save(fileName);
+    saveDict(fileName);
 }
 void Answer::setFileName(std::string fileName)
 {

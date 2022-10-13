@@ -16,7 +16,7 @@ void JSONAnswer::add(answ::AnswerModel *answer)
 void JSONAnswer::fillDict()
 {
     nlohmann::json buff;
-    for(int i = 0; i < answers.size(); i++)
+    for(std::size_t i = 0; i < answers.size(); i++)
     {
         auto answer = answers[i];
         std::string str = "request";
@@ -24,7 +24,4 @@ void JSONAnswer::fillDict()
     }
     dict["answers"] = buff;
 }
-void JSONAnswer::save(const std::string &string)
-{
-    saveDict(string);
-}
+
