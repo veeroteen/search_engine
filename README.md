@@ -2,7 +2,9 @@
 Programm that realize searching and ranking by requested words, in local text files. 
 
 Cmake 3.22
+
 C++ 20
+
 MinGW w64 9.0
 
 # About config.json
