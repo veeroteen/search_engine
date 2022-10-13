@@ -14,11 +14,6 @@ const std::vector<std::string>* Request::getWords( const std::size_t iterator) c
     return (*requests)[iterator];
 }
 
-void Request::loadRequests(const std::string &str)
-{
-    load(str);
-}
-
 std::size_t Request::getRequestsCount() const
 {
     return requestsCount();

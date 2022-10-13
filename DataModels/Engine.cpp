@@ -8,8 +8,6 @@ Engine::Engine(const std::string config,const std::string request,const std::str
     this->answer.setFileName(answer);
 }
 
-
-
 void Engine::work()
 {
     data.UpdateDocumentBase(config);

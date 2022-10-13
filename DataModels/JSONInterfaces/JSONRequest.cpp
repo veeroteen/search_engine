@@ -18,7 +18,7 @@ JSONRequest::~JSONRequest()
     }
 }
 
-void JSONRequest::load(const std::string &str)
+void JSONRequest::loadRequests(const std::string &str)
 {
     openDict(str);
     if(dict.begin() == dict.end())
