@@ -8,7 +8,7 @@
 #include "../JSONWorkers/Config.h"
 #include <thread>
 #include <mutex>
-#include "../Threadpool/ThreadPool.h"
+#include "../../Threadpool/ThreadPool.h"
 #pragma once
 class WordIndex {
     std::map<std::string,std::map<std::shared_ptr<int>,int>> data;

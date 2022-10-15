@@ -9,7 +9,7 @@
 #include "JSONWorkers/Config.h"
 #include "JSONWorkers/Answer.h"
 #include "Models/WordIndex.h"
-#include "Threadpool/ThreadPool.h"
+#include "../Threadpool/ThreadPool.h"
 //main class of app
 class Engine {
     Request request;
