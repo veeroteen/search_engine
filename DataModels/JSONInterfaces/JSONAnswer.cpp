@@ -24,4 +24,14 @@ void JSONAnswer::fillDict()
     }
     dict["answers"] = buff;
 }
-
+void JSONAnswer::addAnswer(std::vector<answ::Answer> &answer , std::size_t max_responses , int requestID)
+{
+    auto buff = new answ::AnswerModel();
+    buff->requestID = requestID;
+    for (std::size_t i = 0; i < max_responses && i < answer.size(); i++) {
+        buff->addAnswer(answer[i]);
+    }
+    mute.lock();
+    add(buff);
+    mute.unlock();
+}

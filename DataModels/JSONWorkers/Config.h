@@ -11,7 +11,7 @@ class Config : public JSONConfig{
 public:
     Config() = default;
     Config(const std::string &str);
-
+    ~Config() = default;
     std::size_t getFilesCount() const;
 
     //return filename by iterator

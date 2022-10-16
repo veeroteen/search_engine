@@ -11,7 +11,7 @@ class Request : public JSONRequest {
 public:
     Request() = default;
     Request(const std::string &str);
-
+    ~Request() = default;
     const std::vector<std::string>* getWords( const std::size_t iterator) const;
     std::size_t getRequestsCount() const;
 

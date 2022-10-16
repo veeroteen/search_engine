@@ -1,6 +1,5 @@
 #include <iostream>
 #include <map>
-#include "WordCounter.h"
 #include <fstream>
 #include <vector>
 #include <algorithm>
@@ -11,7 +10,7 @@
 #include "../../Threadpool/ThreadPool.h"
 #pragma once
 class WordIndex {
-    std::map<std::string,std::map<std::shared_ptr<int>,int>> data;
+    std::map<std::string,std::map<int,int>> data;
     std::mutex mute;
 
     //add words from files to word dictionary

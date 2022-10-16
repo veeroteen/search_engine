@@ -42,7 +42,7 @@ void WordIndex::UpdateDocumentBase(const std::vector<std::string> &docs)
 
 void WordIndex::indexFile(std::istream *file, int i)
 {
-    std::shared_ptr<int> docID = std::make_shared<int>(i);
+    int docID = i;
     while (!(file->eof())) {
         std::string cache;
         (*file) >> cache;
@@ -78,7 +78,7 @@ void WordIndex::answerFill(const std::string &word , std::map<int,int> &bite) co
     if(ptr != data.end()){
         auto counter = &ptr->second;
         for (auto count: *counter) {
-            bite[*(count.first)] += count.second;
+            bite[count.first] += count.second;
         }
     }
 }

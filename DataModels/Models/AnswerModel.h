@@ -1,5 +1,4 @@
 #include "nlohmann/json.hpp"
-#include "WordCounter.h"
 #include <iostream>
 #pragma once
 
