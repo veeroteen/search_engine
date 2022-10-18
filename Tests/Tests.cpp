@@ -9,8 +9,6 @@ void TestPreload(const  std::string &cfg, const std::vector<std::string>& docs ,
 {
     setConfig( cfg, docs);
     setRequests(req,requests);
-
-
 }
 void TestRelativeIndexFunctionality(
         const std::vector<std::string>& docs,
@@ -111,9 +109,14 @@ void TestInvertedIndexFunctionality(
         std::vector<std::string>& requests,
         const std::vector<std::map<int,int>>& expected
 ) {
+    std::string cfg = "testcfg.json";
+    std::string req = "testreq.json";
+    TestPreload(cfg,docs,req,requests);
     std::vector<std::map<int,int>> result;
     WordIndex idx;
-    idx.UpdateDocumentBase(docs);
+    Config config;
+    config.loadConfig(cfg);
+    idx.UpdateDocumentBase(config);
 
     for(auto& request : requests) {
         std::map<int,int> bite;

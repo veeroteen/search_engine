@@ -14,7 +14,7 @@ class WordIndex {
     std::mutex mute;
 
     //add words from files to word dictionary
-    void indexFile(std::istream *file, int i);
+
 
     // bring word to normal state(change uppercase letter to lower). set word null if word have unsupported symbol
     void wordHandler(std::string &str) const;
@@ -25,9 +25,8 @@ public:
 
     //fill word dictionary, by files input
     void UpdateDocumentBase(const Config &config);
-
+    void indexFile(std::vector<std::string> *words, int i);
     //fill word dictionary, by vector of texts
-    void UpdateDocumentBase(const std::vector<std::string> &docs);
 
     //fill raw answer by word
     void answerFill( const std::string &word , std::map<int,int> &bite) const;

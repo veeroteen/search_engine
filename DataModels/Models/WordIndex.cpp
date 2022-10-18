@@ -1,59 +1,36 @@
 #include "WordIndex.h"
 
-void WordIndex::UpdateDocumentBase(const Config &config)
-{
-    std::size_t count = config.getFilesCount();
-    auto f = [this , &config](int i)
-            {
-                std::ifstream file(config.getFile(i));
-                if (file.is_open()) {
-                    indexFile(&file , i);
-                }
-            };
+void WordIndex::UpdateDocumentBase(const Config &config) {
+    size_t count = config.getFilesCount();
     std::vector<std::future<void>> futures;
     ThreadPool threadPool(2);
-    for(std::size_t i = 0; i < count; i++) {
-        futures.push_back(threadPool.enqueue(f,i));
+    for (size_t i = 0; i < count; i++) {
+        std::ifstream file(config.getFile(i));
+        std::vector<std::string> *words = new std::vector<std::string>;
+        while (!file.eof()) {
+            std::string word;
+            file >> word;
+            words->push_back(word);
+        }
+        futures.push_back(threadPool.enqueue(&WordIndex::indexFile, this, words, i));
     }
-    for(auto &future : futures){
+    for (auto &future: futures) {
         future.get();
     }
 }
-
-void WordIndex::UpdateDocumentBase(const std::vector<std::string> &docs)
-{
-
-    auto f = [this]( const std::string *str , int i) //lambda for multithreading
-            {
-                std::stringstream file;
-                file << (*str);
-                indexFile(&file,i);
-            };
-
-    std::vector<std::future<void>> futures;
-    ThreadPool threadPool(2);
-    for(std::size_t i = 0; i < docs.size(); i++) {
-        threadPool.enqueue(f ,&(docs[i]) , i);
-    }
-    for(auto &future : futures){
-        future.get();
-    }
-}
-
-void WordIndex::indexFile(std::istream *file, int i)
+void WordIndex::indexFile(std::vector<std::string> *words, int i)
 {
     int docID = i;
-    while (!(file->eof())) {
-        std::string cache;
-        (*file) >> cache;
-        wordHandler(cache);
-        if(cache.length() > 0) {
+    for(auto word : *words) {
+        wordHandler(word);
+        if(word.length() > 0) {
             mute.lock();
-            auto ptr = &data[cache];
+            auto ptr = &data[word];
             (*ptr)[docID] += 1;
             mute.unlock();
         }
     }
+    delete words;
 }
 
 void WordIndex::wordHandler(std::string &str) const
