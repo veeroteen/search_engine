@@ -3,7 +3,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
-#include "../Models/AnswerModel.h"
+#include "Models/AnswerModel.h"
 
 class JSONAnswer : public JSONBase {
     std::mutex mute;

@@ -4,10 +4,10 @@
 #include <vector>
 #include <algorithm>
 #include "AnswerModel.h"
-#include "../JSONWorkers/Config.h"
+#include "JSONWorkers/Config.h"
 #include <thread>
 #include <mutex>
-#include "../../Threadpool/ThreadPool.h"
+#include "ThreadPool.h"
 #pragma once
 class WordIndex {
     std::map<std::string,std::map<int,int>> data;

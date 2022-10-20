@@ -1,7 +1,7 @@
 #include <string>
 #include <vector>
 #include <nlohmann/json.hpp>
-#include "../DataModels/Engine.h"
+#include "Engine.h"
 #include <fstream>
 void setConfig(const std::string &fileName, const std::vector<std::string> &docs){
     nlohmann::json cfg;

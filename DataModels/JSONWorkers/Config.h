@@ -1,5 +1,5 @@
 #pragma once
-#include "../JSONInterfaces/JSONConfig.h"
+#include "JSONInterfaces/JSONConfig.h"
 #include <vector>
 #include <string>
 #include <iostream>
