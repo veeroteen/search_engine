@@ -21,11 +21,13 @@ JSONRequest::~JSONRequest()
 void JSONRequest::loadRequests(const std::string &str)
 {
     openDict(str);
+    /*
     if(dict.begin() == dict.end())
     {
         openDict("../Configs/requests.json");
         saveDict(str);
     }
+     */
     std::vector<std::string> rawRequests = dict["requests"];
     for(auto i : rawRequests)
     {

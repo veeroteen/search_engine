@@ -9,6 +9,7 @@ int JSONConfig::getResponsesCount() const
 void JSONConfig::load(const std::string &str)
 {
     openDict(str);
+    /*
     if(dict.begin() == dict.end())
     {
         openDict("../Configs/config.json");
@@ -28,6 +29,7 @@ void JSONConfig::load(const std::string &str)
             output.close();
         }
     }
+     */
     responseCount = dict["config"]["max_responses"];
     files = std::vector<std::string>(dict["files"]);
 
